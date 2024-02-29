@@ -4,9 +4,9 @@ const heicConvert = require('heic-convert');
 const piexif = require('piexif');
 const { formatTypes } = require('./format.js')
 
-const convert = async (inputPath, outputPath) => {
-  if (typeof inputPath !== 'string' || typeof outputPath !== 'string') {
-    let err = new Error('Invalid inputs: expecting two string arguments');
+const convert = async (inputFile, outputPath = null, quality = 1) => {
+  if (outputPath && typeof outputPath !== 'string') {
+    let err = new Error('Invalid argument: outputPath is expected to be a string');
     delete err.stack;
     throw err;
   }
@@ -20,7 +20,7 @@ const convert = async (inputPath, outputPath) => {
   };
 
   const exr = new exifr.Exifr(options);
-  await exr.read(inputPath);
+  await exr.read(inputFile);
   var { ifd0, exif, gps } = await exr.parse();
 
   const filterExifKeys = (tag, raw) => {
@@ -50,18 +50,21 @@ const convert = async (inputPath, outputPath) => {
   var exifBytes = piexif.dump({'0th': ifd0, 'Exif': exif, 'GPS': gps});
 
   // Convert HEIC to JPG
-  fileData = fs.readFileSync(inputPath);
+  const fileData = typeof inputFile === 'string' ? fs.readFileSync(inputFile) : inputFile;
   const outputBuffer = await heicConvert({
     buffer: fileData,
     format: 'JPEG',
-    quality: 1
+    quality: quality
   });
 
   // Attach relevant metadata
   const imgData = outputBuffer.toString('binary');
   const newData = piexif.insert(exifBytes, imgData);
   const newJpeg = Buffer.from(newData, 'binary');
-  await fs.writeFileSync(outputPath, newJpeg);
+  if (outputPath)
+    await fs.writeFileSync(outputPath, newJpeg);
+  else
+    return newJpeg
 };
 
 module.exports = {

@@ -14,13 +14,24 @@ npm install heic-jpg-exif
 
 ## Usage (NodeJS)
 
-Convert an HEIC image to JPEG while retaining the metadata
-
 ```javascript
 const convert = require('heic-jpg-exif');
+````
 
-await convert('input.HEIC', 'output.jpg');
+Convert an HEIC image file to a JPEG file at maximum quality (1)
+
+```javascript
+await convert('input.HEIC', 'output.jpg', 1);
 ```
+
+Convert an HEIC buffer to a JPEG buffer
+
+```javascript
+const inBuffer = fs.readFileSync('input.HEIC');
+const outBuffer = await convert(inBuffer);
+```
+
+
 
 ## Background
 
