@@ -22,8 +22,14 @@ const convert = async (inputFile, outputPath = null, quality = 1) => {
   const exr = new exifr.Exifr(options);
   await exr.read(inputFile);
   var { ifd0, exif, gps } = await exr.parse();
+  if (!(exr.fileParser instanceof exifr.fileParsers.get('heic'))) {
+    if (exr.fileParser instanceof exifr.fileParsers.get('jpeg'))
+      throw new TypeError('Input is already a JPEG image');
+    throw new TypeError('Input is not a HEIC image');
+  }
 
   const filterExifKeys = (tag, raw) => {
+    if (typeof raw === 'undefined') return {}
     let filteredKeys = Object.values(piexif.TagValues[tag]).map(String);
     return Object.keys(raw)
      .filter(key => filteredKeys.includes(key))
@@ -62,9 +68,9 @@ const convert = async (inputFile, outputPath = null, quality = 1) => {
   const newData = piexif.insert(exifBytes, imgData);
   const newJpeg = Buffer.from(newData, 'binary');
   if (outputPath)
-    await fs.writeFileSync(outputPath, newJpeg);
+    fs.writeFileSync(outputPath, newJpeg);
   else
-    return newJpeg
+    return newJpeg;
 };
 
 module.exports = {
