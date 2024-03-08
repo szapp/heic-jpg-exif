@@ -4,18 +4,20 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-async function compare(imgData, control) {
-  const options = {
-    translateKeys: false,
-    translateValues: false,
-    reviveValues: false,
-    sanitize: false,
-    mergeOutput: false,
-  };
-  const exr = new exifr.Exifr(options);
-  await exr.read(imgData);
-  const test = await exr.parse();
+const parseOptions = {
+  ifd0: true,
+  ifd1: false,
+  exif: true,
+  gps: true,
+  translateKeys: false,
+  translateValues: false,
+  reviveValues: false,
+  sanitize: true,
+  mergeOutput: false,
+};
 
+async function compare(imgData, control) {
+  const test = await exifr.parse(imgData, parseOptions);
   return JSON.stringify(control) !== JSON.stringify(test);
 }
 
