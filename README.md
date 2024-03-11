@@ -35,10 +35,10 @@ const outBuffer = await convert(inBuffer);
 
 ## Background
 
-The HEIC image is first converted to a JPG with `heic-convert` and then complemented with the EXIF metadata of the source image using `exifr` and `piexif`.
+The HEIC image is first converted to a JPG with `heic-convert` and then complemented with the EXIF metadata of the source image using `exifr` and `piexif-ts`.
 
 ## See also
 
 * [heic-convert](https://www.npmjs.com/package/heic-convert)
 * [exifr](https://www.npmjs.com/package/exifr)
-* [piexif](https://www.npmjs.com/package/piexif)
+* [piexif-ts](https://www.npmjs.com/package/piexif-ts)
