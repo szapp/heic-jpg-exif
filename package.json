@@ -29,7 +29,7 @@
     "exifr": "^7.1.3",
     "fraction.js": "^4.3.7",
     "heic-convert": "^2.1.0",
-    "piexif-ts-0232": "github:szapp/piexif-ts-0232"
+    "piexif-ts": "^2.1.0"
   },
   "engines": {
     "node": ">=14.0.0"

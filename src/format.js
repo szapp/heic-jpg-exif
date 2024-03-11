@@ -1,5 +1,5 @@
 const Fraction = require('fraction.js');
-const { Tags, Types } = require('piexif-ts-0232');
+const { Tags, Types } = require('piexif-ts');
 
 const toArray = (input) => {
   if (typeof input === 'object')

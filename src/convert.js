@@ -1,7 +1,7 @@
 const exifr = require('exifr');
 const fs = require('fs');
 const heicConvert = require('heic-convert');
-const piexif = require('piexif-ts-0232');
+const piexif = require('piexif-ts');
 const { formatTypes } = require('./format.js');
 
 const parseOptions = {
