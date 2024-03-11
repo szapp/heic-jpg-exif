@@ -1,6 +1,6 @@
 {
   "name": "heic-jpg-exif",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Conversion extending heic-convert to retain essential EXIF metadata",
   "main": "src/index.js",
   "scripts": {
