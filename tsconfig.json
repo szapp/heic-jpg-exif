@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2016",
+    "lib": ["ES2016"],
+    "module": "commonjs",
+    "rootDir": "src",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+  },
+  "include": ["src", "dev/index.js"],
+  "exclude": ["node_modules", "dist", "dev", "test", ".github", ".vscode"]
+}

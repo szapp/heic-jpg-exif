@@ -2,8 +2,10 @@
   "name": "heic-jpg-exif",
   "version": "0.3.2",
   "description": "Conversion extending heic-convert to retain essential EXIF metadata",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
+    "lint": "eslint src/**/* --ext .js,.ts",
     "test": "node test/test.js"
   },
   "repository": {
@@ -33,5 +35,16 @@
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "@types/heic-convert": "^1.2.3",
+    "@types/node": "^20.11.27",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
+    "prettier-eslint": "^16.3.0",
+    "typescript": "^5.4.2"
   }
 }
