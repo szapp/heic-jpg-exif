@@ -60,13 +60,13 @@ async function convert(inputFile, outputPath = null, quality = 1) {
   exif = formatTypes('Exif', exif);
   gps = formatTypes('GPS', gps);
 
-  // Conversion rotates the image upright
+  // Conversion rotates the image upright: reset EXIF orientation
+  ifd0[piexif.TagValues.ImageIFD.Orientation] = 1
   if (ifd0[piexif.TagValues.ImageIFD.Orientation] > 4) {
     const xd = exif[piexif.TagValues.ExifIFD.PixelXDimension]
     const yd = exif[piexif.TagValues.ExifIFD.PixelYDimension]
     exif[piexif.TagValues.ExifIFD.PixelXDimension] = yd
     exif[piexif.TagValues.ExifIFD.PixelYDimension] = xd
-    ifd0[piexif.TagValues.ImageIFD.Orientation] = 1
   }
 
   const exifBytes = piexif.dump({
