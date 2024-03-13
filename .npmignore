@@ -2,3 +2,6 @@
 /test/
 /package-lock.json
 /.*
+/src/
+/dev/
+/tsconfig.json
