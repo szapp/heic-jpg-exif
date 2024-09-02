@@ -10,7 +10,13 @@ function toArray(input: unknown): unknown[] | ArrayBuffer {
 function toRational(input: unknown | unknown[] | ArrayLike<unknown>): number[][] {
   return (toArray(input) as unknown[]).map(Number).map((dec) => {
     const fra = new Fraction(Number(dec))
-    return [fra.s * fra.n, fra.d]
+    let numerator = fra.s * fra.n
+    let denominator = fra.d
+    if (numerator > 0x7fffffff || -numerator > 0x7fffffff) {
+      numerator = Math.round(dec)
+      denominator = 0
+    }
+    return [numerator, denominator]
   })
 }
 
