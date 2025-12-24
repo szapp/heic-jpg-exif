@@ -84,14 +84,15 @@ export default async function convert(
   })
 
   // Convert HEIC to JPG
-  const outputBuffer: ArrayBuffer = await heicConvert({
-    buffer: fileData,
+  const outputBufferArray: ArrayBuffer = await heicConvert({
+    buffer: fileData as unknown as ArrayBuffer,  // Some type mismatch in heic-convert
     format: 'JPEG',
     quality: quality,
   })
 
   // Attach relevant metadata
-  const imgData: string = (outputBuffer as Buffer).toString('binary')
+  const outputBuffer: Buffer = Buffer.from(outputBufferArray)
+  const imgData: string = outputBuffer.toString('binary')
   const newData: string = piexif.insert(exifBytes, imgData)
   const newJpeg: Buffer = Buffer.from(newData, 'binary')
   if (outputPath) fs.writeFileSync(outputPath, newJpeg)
