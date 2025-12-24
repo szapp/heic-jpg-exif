@@ -34,7 +34,7 @@ export function formatTypes(
     let type: number
     try {
       type = Tags[tag][Number(key)].type
-    } catch (e) {
+    } catch {
       throw new Error(`EXIF 2.32 (${tag}) does have the tag ${key}`)
     }
     switch (type) {
