@@ -1,5 +1,5 @@
+import fs from 'node:fs'
 import { Exifr, fileParsers } from 'exifr'
-import fs from 'fs'
 import heicConvert from 'heic-convert'
 import * as piexif from 'piexif-ts'
 import { formatTypes } from './format'
@@ -7,8 +7,8 @@ import { formatTypes } from './format'
 export default async function convert(
   inputFile: string | Buffer,
   outputPath?: string | undefined,
-  quality: number | undefined = 1
-): Promise<Buffer | void> {
+  quality: number | undefined = 1,
+): Promise<Buffer | undefined> {
   if (outputPath && typeof outputPath !== 'string') {
     const err: Error = new Error('Invalid argument: outputPath is expected to be a string')
     delete err.stack
@@ -38,12 +38,16 @@ export default async function convert(
   }
   const exrExt: ExifrInitialized = exr as ExifrInitialized
   if (!(exrExt?.fileParser instanceof fileParsers.get('heic'))) {
-    if (exrExt?.fileParser instanceof fileParsers.get('jpeg')) throw new TypeError('Input is already a JPEG image')
+    if (exrExt?.fileParser instanceof fileParsers.get('jpeg'))
+      throw new TypeError('Input is already a JPEG image')
     throw new TypeError('Input is not a HEIC image')
   }
 
   // Filter and format metadata tags
-  const filterTags = (field: 'ImageIFD' | 'ExifIFD' | 'GPSIFD' | 'InteropIFD', tags: Record<string, unknown> | undefined) => {
+  const filterTags = (
+    field: 'ImageIFD' | 'ExifIFD' | 'GPSIFD' | 'InteropIFD',
+    tags: Record<string, unknown> | undefined,
+  ) => {
     if (typeof tags === 'undefined') return {}
     const filteredKeys: string[] = Object.values(piexif.TagValues[field]).map(String)
     return Object.keys(tags)
@@ -53,7 +57,7 @@ export default async function convert(
           obj[key] = tags[key]
           return obj
         },
-        {} as Record<string, unknown>
+        {} as Record<string, unknown>,
       )
   }
 
@@ -85,7 +89,7 @@ export default async function convert(
 
   // Convert HEIC to JPG
   const outputBufferArray: ArrayBuffer = await heicConvert({
-    buffer: fileData as unknown as ArrayBuffer,  // Some type mismatch in heic-convert
+    buffer: fileData as unknown as ArrayBuffer, // Some type mismatch in heic-convert
     format: 'JPEG',
     quality: quality,
   })

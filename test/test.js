@@ -1,8 +1,8 @@
 const convert = require('../dist/index.js')
 const exifr = require('exifr')
-const fs = require('fs')
-const os = require('os')
-const path = require('path')
+const fs = require('node:fs')
+const os = require('node:os')
+const path = require('node:path')
 
 const parseOptions = {
   ifd0: true,
@@ -75,6 +75,6 @@ async function run() {
 
 try {
   run()
-} catch (err) {
+} catch (_err) {
   process.exit(1)
 }

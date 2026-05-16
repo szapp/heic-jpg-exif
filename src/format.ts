@@ -27,7 +27,7 @@ function toAscii(input: unknown): string {
 
 export function formatTypes(
   tag: 'Image' | '0th' | 'Exif' | 'Interop' | 'GPS' | '1st',
-  raw: Record<string, unknown>
+  raw: Record<string, unknown>,
 ): Record<string, unknown> {
   const output: Record<string, unknown> = {}
   for (const [key, value] of Object.entries(raw)) {
