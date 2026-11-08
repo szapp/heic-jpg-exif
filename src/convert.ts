@@ -88,8 +88,8 @@ export default async function convert(
   })
 
   // Convert HEIC to JPG
-  const outputBufferArray: ArrayBuffer = await heicConvert({
-    buffer: fileData as unknown as ArrayBuffer, // Some type mismatch in heic-convert
+  const outputBufferArray = await heicConvert({
+    buffer: fileData, // Some type mismatch in heic-convert
     format: 'JPEG',
     quality: quality,
   })

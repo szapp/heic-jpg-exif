@@ -32,16 +32,15 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@biomejs/biome": "^2.4.15",
     "exifr": "^7.1.3",
     "fraction.js": "^5.3.4",
     "heic-convert": "^2.1.0",
     "piexif-ts": "^2.1.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.15",
     "@types/heic-convert": "^2.1.0",
     "@types/node": "^25.8.0",
-    "@typescript-eslint/parser": "^8.59.3",
     "typescript": "^6.0.3"
   },
   "volta": {

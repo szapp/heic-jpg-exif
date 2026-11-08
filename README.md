@@ -15,23 +15,21 @@ npm install heic-jpg-exif
 ## Usage (NodeJS)
 
 ```javascript
-const convert = require('heic-jpg-exif');
-````
+const convert = require('heic-jpg-exif')
+```
 
 Convert an HEIC image file to a JPEG file at maximum quality (1)
 
 ```javascript
-await convert('input.HEIC', 'output.jpg', 1);
+await convert('input.HEIC', 'output.jpg', 1)
 ```
 
 Convert an HEIC buffer to a JPEG buffer
 
 ```javascript
-const inBuffer = fs.readFileSync('input.HEIC');
-const outBuffer = await convert(inBuffer);
+const inBuffer = fs.readFileSync('input.HEIC')
+const outBuffer = await convert(inBuffer)
 ```
-
-
 
 ## Background
 
@@ -39,6 +37,6 @@ The HEIC image is first converted to a JPG with `heic-convert` and then compleme
 
 ## See also
 
-* [heic-convert](https://www.npmjs.com/package/heic-convert)
-* [exifr](https://www.npmjs.com/package/exifr)
-* [piexif-ts](https://www.npmjs.com/package/piexif-ts)
+- [heic-convert](https://www.npmjs.com/package/heic-convert)
+- [exifr](https://www.npmjs.com/package/exifr)
+- [piexif-ts](https://www.npmjs.com/package/piexif-ts)
